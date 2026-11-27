@@ -1,0 +1,309 @@
+/* ── 가족 합동 비서실 ─────────────────────────────── */
+:root{
+  --bg:#fff8f0;
+  --bg-2:#fdeee1;
+  --ink:#3b2f2a;
+  --ink-2:#7a6a61;
+  --ink-3:#a99a90;
+  --card:#fffdfa;
+  --line:#f0e2d4;
+  --lime:#a8d36b;
+  --lime-d:#7fae45;
+  --pink:#f7a8b8;
+  --sky:#8fc9f2;
+  --butter:#ffd47e;
+  --shadow:0 10px 24px rgba(120,90,60,.10);
+  --shadow-s:0 4px 12px rgba(120,90,60,.08);
+  --r:20px;
+}
+
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+html,body{margin:0; padding:0}
+body{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1100px 520px at 8% -8%, #f2ffd9 0%, rgba(242,255,217,0) 60%),
+    radial-gradient(900px 480px at 100% 0%, #ffe6ef 0%, rgba(255,230,239,0) 55%),
+    var(--bg);
+  min-height:100vh;
+  -webkit-text-size-adjust:100%;
+}
+button{font-family:inherit; color:inherit; cursor:pointer; border:none; background:none}
+input{font-family:inherit; color:inherit}
+h1,h2,h3,p{margin:0}
+
+/* ── 잠금 화면 ─────────────────────────────────── */
+.lock{
+  min-height:100vh; min-height:100dvh;
+  display:flex; align-items:center; justify-content:center;
+  padding:24px 18px calc(24px + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(700px 420px at 50% -6%, #e8ffcf 0%, rgba(232,255,207,0) 62%),
+    radial-gradient(600px 400px at 90% 110%, #ffe1ea 0%, rgba(255,225,234,0) 60%),
+    var(--bg);
+}
+.lock-card{
+  width:100%; max-width:360px; text-align:center;
+  background:rgba(255,253,250,.92);
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:26px 22px 22px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(6px);
+}
+.lock-critter{width:96px; height:96px; margin:0 auto 6px}
+.lock-critter svg{width:100%; height:100%; animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.lock-title{font-size:22px; letter-spacing:-.4px}
+.lock-sub{color:var(--ink-2); font-size:13px; margin-top:6px}
+.pin-dots{display:flex; gap:14px; justify-content:center; margin:20px 0 8px}
+.pin-dots span{
+  width:14px; height:14px; border-radius:50%;
+  background:#fff; border:2px solid #e3d3c2; transition:.16s;
+}
+.pin-dots span.on{background:var(--lime); border-color:var(--lime-d); transform:scale(1.08)}
+.pin-msg{font-size:12.5px; color:var(--ink-3); min-height:18px}
+.pin-msg.err{color:#e2665f}
+.shake{animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.keypad{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px}
+.keypad button{
+  height:56px; border-radius:18px; font-size:22px; font-weight:700;
+  background:#fff; border:1px solid var(--line); box-shadow:var(--shadow-s);
+  transition:transform .08s, background .12s;
+}
+.keypad button:active{transform:scale(.96); background:#f6ffe9}
+.keypad .key-ghost{font-size:14px; font-weight:600; color:var(--ink-2); background:#fbf3ea}
+
+/* ── 앱 틀 ────────────────────────────────────── */
+.app{min-height:100vh; min-height:100dvh; display:flex; flex-direction:column}
+.topbar{
+  position:sticky; top:0; z-index:20;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:calc(10px + env(safe-area-inset-top)) 16px 10px;
+  background:rgba(255,248,240,.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex; align-items:center; gap:9px; min-width:0}
+.brand-icon{font-size:22px}
+.brand strong{display:block; font-size:15.5px; letter-spacing:-.3px}
+.brand-sub{display:block; font-size:11px; color:var(--ink-3); margin-top:1px}
+.topbar-right{display:flex; align-items:center; gap:6px}
+.me-chip{
+  display:flex; align-items:center; gap:6px;
+  padding:7px 12px; border-radius:999px; font-size:12.5px; font-weight:700;
+  background:#fff; border:1px solid var(--line); box-shadow:var(--shadow-s);
+}
+.me-dot{width:8px; height:8px; border-radius:50%; background:#d9cec4}
+.icon-btn{
+  width:36px; height:36px; border-radius:50%; font-size:15px;
+  background:#fff; border:1px solid var(--line); box-shadow:var(--shadow-s);
+}
+
+.main{flex:1; width:100%; max-width:760px; margin:0 auto; padding:16px 16px 96px}
+.view{display:block; animation:fade .22s ease}
+@keyframes fade{from{opacity:0; transform:translateY(5px)}to{opacity:1; transform:none}}
+
+/* ── 히어로 ───────────────────────────────────── */
+.hero{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:18px 18px; border-radius:24px;
+  background:linear-gradient(135deg,#f6ffe6 0%,#fff6ea 55%,#ffeef4 100%);
+  border:1px solid var(--line); box-shadow:var(--shadow-s);
+}
+.hero-kicker{font-size:11.5px; font-weight:800; color:var(--lime-d); letter-spacing:.4px}
+.hero-title{font-size:21px; letter-spacing:-.5px; margin-top:3px}
+.hero-sub{font-size:12px; color:var(--ink-2); margin-top:5px}
+.hero-stack{display:flex; padding-right:6px}
+.hero-stack .mini{margin-left:-12px; border:2px solid #fff; border-radius:50%; width:38px; height:38px; background:#fff; box-shadow:var(--shadow-s)}
+.hero-stack .mini svg{width:100%; height:100%}
+
+/* ── 방 카드 ──────────────────────────────────── */
+.room-grid{display:grid; gap:12px; margin-top:14px; grid-template-columns:1fr}
+@media(min-width:640px){.room-grid{grid-template-columns:repeat(3,1fr)}}
+.room{
+  border-radius:22px; padding:14px 14px 12px; border:1px solid var(--line);
+  box-shadow:var(--shadow-s); min-height:120px;
+  display:flex; flex-direction:column; gap:10px;
+  transition:transform .12s, box-shadow .18s;
+}
+.room:active{transform:scale(.995)}
+.room[data-room="living"]{background:linear-gradient(160deg,#fff4e4,#fffaf3)}
+.room[data-room="meeting"]{background:linear-gradient(160deg,#eaf3ff,#f8fbff)}
+.room[data-room="work"]{background:linear-gradient(160deg,#f0fbe4,#fbfef6)}
+.room.mine{box-shadow:0 0 0 2px var(--lime) inset, var(--shadow)}
+.room-top{display:flex; align-items:center; justify-content:space-between}
+.room-name{font-size:14.5px; font-weight:800; letter-spacing:-.3px}
+.room-count{font-size:11px; font-weight:700; color:var(--ink-2); background:rgba(255,255,255,.8); border:1px solid var(--line); padding:2px 8px; border-radius:999px}
+.room-people{display:flex; flex-direction:column; gap:7px}
+.person{display:flex; align-items:center; gap:9px}
+.person .ava{width:34px; height:34px; flex:0 0 34px; position:relative}
+.person .ava svg{width:100%; height:100%}
+.person-txt{min-width:0; flex:1}
+.person-name{font-size:12.5px; font-weight:800; display:flex; align-items:center; gap:5px}
+.person-pickle{font-size:10px; color:var(--ink-3); font-weight:700}
+.person-status{font-size:11.5px; color:var(--ink-2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.person-ago{font-size:10px; color:var(--ink-3); flex:0 0 auto}
+.room-empty{font-size:11.5px; color:var(--ink-3); padding:6px 2px}
+.live-dot{width:6px; height:6px; border-radius:50%; background:#cfc4ba; display:inline-block}
+.live-dot.on{background:#5ec26a; box-shadow:0 0 0 3px rgba(94,194,106,.18)}
+
+/* ── 패널 공통 ────────────────────────────────── */
+.panel{
+  background:var(--card); border:1px solid var(--line); border-radius:24px;
+  padding:16px; margin-top:14px; box-shadow:var(--shadow-s);
+}
+.panel-head h3{font-size:15px; letter-spacing:-.3px}
+.panel-hint{font-size:11.5px; color:var(--ink-3); margin-top:4px}
+.field{margin-top:14px}
+.field-label{display:block; font-size:11.5px; font-weight:800; color:var(--ink-2); margin-bottom:7px}
+
+/* 프로필 선택 줄 */
+.who-row{display:flex; gap:8px; margin-top:12px; overflow-x:auto; padding-bottom:2px; scrollbar-width:none}
+.who-row::-webkit-scrollbar{display:none}
+.who-btn{
+  flex:0 0 auto; display:flex; align-items:center; gap:7px;
+  padding:7px 12px 7px 7px; border-radius:999px;
+  background:#fff; border:1px solid var(--line); font-size:12.5px; font-weight:800;
+  color:var(--ink-2);
+}
+.who-btn .ava{width:26px; height:26px}
+.who-btn .ava svg{width:100%; height:100%}
+.who-btn.sel{background:#f4ffe4; border-color:var(--lime); color:var(--ink); box-shadow:0 0 0 2px rgba(168,211,107,.22)}
+
+/* 방 선택 세그먼트 */
+.seg{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
+.seg button{
+  padding:11px 6px; border-radius:16px; font-size:12.5px; font-weight:800;
+  background:#fff; border:1px solid var(--line); color:var(--ink-2);
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+}
+.seg button .seg-ico{font-size:17px}
+.seg button.sel{background:#f4ffe4; border-color:var(--lime); color:var(--ink); box-shadow:0 0 0 2px rgba(168,211,107,.2)}
+
+/* 상태 입력 */
+.status-row{display:flex; gap:8px}
+.status-row input{
+  flex:1; min-width:0; padding:12px 14px; border-radius:14px;
+  border:1px solid var(--line); background:#fff; font-size:14px;
+}
+.status-row input:focus{outline:none; border-color:var(--lime); box-shadow:0 0 0 3px rgba(168,211,107,.2)}
+.btn-save{
+  padding:0 16px; border-radius:14px; font-size:13px; font-weight:800;
+  background:var(--lime); color:#25400f; border:1px solid var(--lime-d);
+}
+.btn-save:active{transform:scale(.97)}
+.chips{display:flex; flex-wrap:wrap; gap:7px; margin-top:10px}
+.chips button{
+  padding:7px 11px; border-radius:999px; font-size:11.5px; font-weight:700;
+  background:#fbf3ea; border:1px solid var(--line); color:var(--ink-2);
+}
+.chips button:active{background:#f1e6d9}
+.footnote{font-size:11px; color:var(--ink-3); text-align:center; margin-top:16px; line-height:1.55}
+
+/* ── 회의실 ──────────────────────────────────── */
+.chat-panel{display:flex; flex-direction:column; min-height:calc(100dvh - 220px)}
+.chat-list{flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:10px; padding:14px 2px 4px; max-height:52vh}
+.msg{display:flex; gap:8px; align-items:flex-start; max-width:100%}
+.msg .ava{width:30px; height:30px; flex:0 0 30px}
+.msg .ava svg{width:100%; height:100%}
+.msg-body{background:#fbf3ea; border-radius:4px 16px 16px 16px; padding:9px 12px; max-width:min(76%,520px)}
+.msg-head{display:flex; align-items:center; gap:6px; margin-bottom:3px}
+.msg-name{font-size:11px; font-weight:800; color:var(--ink-2)}
+.msg-time{font-size:10px; color:var(--ink-3)}
+.msg-text{font-size:13.5px; line-height:1.5; white-space:pre-wrap; word-break:break-word}
+.msg.mine{flex-direction:row-reverse}
+.msg.mine .msg-body{background:#eafbd6; border-radius:16px 4px 16px 16px}
+.msg-del{font-size:10px; color:var(--ink-3); background:none; padding:0 2px; align-self:center}
+.chat-form{display:flex; gap:8px; padding-top:12px; margin-top:8px; border-top:1px solid var(--line)}
+.chat-form input, .todo-form input{
+  flex:1; min-width:0; padding:13px 15px; border-radius:16px;
+  border:1px solid var(--line); background:#fff; font-size:14px;
+}
+.chat-form input:focus, .todo-form input:focus{outline:none; border-color:var(--lime); box-shadow:0 0 0 3px rgba(168,211,107,.2)}
+.chat-form button, .todo-form button{
+  padding:0 18px; border-radius:16px; font-size:13px; font-weight:800;
+  background:var(--lime); color:#25400f; border:1px solid var(--lime-d);
+}
+
+/* ── 할 일 ───────────────────────────────────── */
+.todo-form{display:flex; gap:8px; margin-top:14px}
+.todo-list{list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:8px}
+.todo{
+  display:flex; align-items:center; gap:10px;
+  padding:12px 12px; border-radius:16px; background:#fff; border:1px solid var(--line);
+}
+.todo-check{
+  width:24px; height:24px; flex:0 0 24px; border-radius:8px;
+  border:2px solid #e0d2c3; background:#fff; display:grid; place-items:center;
+  font-size:13px; color:#fff; transition:.15s;
+}
+.todo.done .todo-check{background:var(--lime); border-color:var(--lime-d)}
+.todo-txt{flex:1; font-size:13.5px; line-height:1.45; word-break:break-word}
+.todo.done .todo-txt{color:var(--ink-3); text-decoration:line-through}
+.todo-meta{display:block; font-size:10px; color:var(--ink-3); margin-top:2px}
+.todo-del{font-size:14px; color:var(--ink-3); padding:6px 8px; border-radius:10px}
+.todo-del:active{background:#fbeceb}
+.empty{font-size:12.5px; color:var(--ink-3); text-align:center; padding:22px 0}
+
+/* ── 탭바 ────────────────────────────────────── */
+.tabbar{
+  position:fixed; left:0; right:0; bottom:0; z-index:30;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:6px;
+  padding:8px 12px calc(8px + env(safe-area-inset-bottom));
+  background:rgba(255,253,250,.94);
+  border-top:1px solid var(--line);
+  backdrop-filter:blur(12px);
+}
+.tab{
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+  padding:8px 4px; border-radius:16px; font-size:11px; font-weight:800; color:var(--ink-3);
+}
+.tab .tab-ico{font-size:19px; filter:grayscale(.5); transition:.15s}
+.tab.active{color:var(--ink); background:#f4ffe4}
+.tab.active .tab-ico{filter:none; transform:translateY(-1px)}
+
+/* ── 시트 ────────────────────────────────────── */
+.sheet-backdrop{
+  position:fixed; inset:0; z-index:60; background:rgba(60,45,35,.34);
+  display:flex; align-items:flex-end; justify-content:center; padding:0;
+  animation:fade .18s;
+}
+.sheet{
+  width:100%; max-width:520px; background:var(--card);
+  border-radius:26px 26px 0 0; padding:10px 18px calc(18px + env(safe-area-inset-bottom));
+  box-shadow:0 -12px 30px rgba(90,60,40,.18); animation:up .24s cubic-bezier(.2,.9,.3,1);
+}
+@keyframes up{from{transform:translateY(30px)}to{transform:none}}
+.sheet-grip{width:42px; height:4px; border-radius:99px; background:#e8dccf; margin:2px auto 12px}
+.sheet-title{font-size:16px}
+.sheet-sub{font-size:12px; color:var(--ink-3); margin-top:4px}
+.who-list{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px}
+.who-card{
+  display:flex; align-items:center; gap:10px; padding:12px;
+  border-radius:18px; background:#fff; border:1px solid var(--line); text-align:left;
+}
+.who-card .ava{width:40px; height:40px; flex:0 0 40px}
+.who-card .ava svg{width:100%; height:100%}
+.who-card-name{font-size:13.5px; font-weight:800}
+.who-card-role{font-size:10.5px; color:var(--ink-3)}
+.who-card.sel{border-color:var(--lime); background:#f6ffe9}
+.sheet-close{
+  width:100%; margin-top:14px; padding:13px; border-radius:16px;
+  background:#fbf3ea; border:1px solid var(--line); font-weight:800; font-size:13.5px; color:var(--ink-2);
+}
+
+/* ── 토스트 ──────────────────────────────────── */
+.toast{
+  position:fixed; left:50%; bottom:calc(86px + env(safe-area-inset-bottom));
+  transform:translateX(-50%); z-index:80;
+  background:rgba(59,47,42,.94); color:#fff; font-size:12.5px; font-weight:700;
+  padding:10px 16px; border-radius:999px; box-shadow:var(--shadow);
+  animation:fade .18s;
+}
+
+@media (prefers-color-scheme:dark){
+  /* 밝은 테마 유지: 가족용 앱은 항상 따뜻한 톤 */
+}
