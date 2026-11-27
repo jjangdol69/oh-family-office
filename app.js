@@ -142,8 +142,7 @@ $("#keypad").addEventListener("click", (e) => {
 });
 
 document.addEventListener("keydown", (e) => {
-  if (!$("#lock").offsetParent && !$("#lock").offsetHeight) return;
-  if ($("#app").hidden === false) return;
+  if (!$("#app").hidden) return; // 본문이 열려 있으면 무시
   if (/^[0-9]$/.test(e.key)) {
     if (state.pin.length < 4) { state.pin += e.key; paintPin(); if (state.pin.length === 4) setTimeout(submitPin, 130); }
   } else if (e.key === "Backspace") { state.pin = state.pin.slice(0, -1); paintPin(); }
