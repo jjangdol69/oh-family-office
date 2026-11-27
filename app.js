@@ -1,4 +1,4 @@
-/* 가족 합동 비서실 · app.js */
+/* 방탄가족단 · app.js */
 const firebaseConfig = {
   apiKey: "AIzaSyDubF2Hn1AH3vz7eCDjTulnKcBRX5ntcPU",
   authDomain: "oh-family-office.firebaseapp.com",
