@@ -60,6 +60,14 @@ function clock(at) {
 }
 const isLive = (at) => at && Date.now() - at < 5 * 60 * 1000;
 
+/* 받침에 맞는 조사 (회의실로 / 거실로 / 작업실로) */
+function josaRo(word) {
+  const c = word.charCodeAt(word.length - 1);
+  if (!(c >= 0xac00 && c <= 0xd7a3)) return word + "로";
+  const jong = (c - 0xac00) % 28;
+  return word + (jong === 0 || jong === 8 ? "로" : "으로");
+}
+
 /* 피클 캐릭터 */
 function critter(m) {
   const c = (m && m.color) || "#cfc4ba";
@@ -210,11 +218,11 @@ $("#who-row").addEventListener("click", (e) => {
 });
 $("#room-seg").addEventListener("click", (e) => {
   const b = e.target.closest("[data-room-pick]");
-  if (b) setPresence({ room: b.dataset.roomPick }, ROOMS.find((r) => r.id === b.dataset.roomPick).name + "으로 이동");
+  if (b) setPresence({ room: b.dataset.roomPick }, josaRo(ROOMS.find((r) => r.id === b.dataset.roomPick).name) + " 이동");
 });
 $("#room-grid").addEventListener("click", (e) => {
   const card = e.target.closest(".room");
-  if (card) setPresence({ room: card.dataset.room }, ROOMS.find((r) => r.id === card.dataset.room).name + "으로 이동");
+  if (card) setPresence({ room: card.dataset.room }, josaRo(ROOMS.find((r) => r.id === card.dataset.room).name) + " 이동");
 });
 $("#status-save").addEventListener("click", () => {
   setPresence({ status: $("#status-input").value.trim().slice(0, 30) }, "저장했어요");
