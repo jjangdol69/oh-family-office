@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="방탄가족단">
 <title>방탄가족단</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237fb84e'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body>
 
@@ -54,12 +54,23 @@
 
   <main class="main">
 
-    <section class="view" id="view-office">
-      <h2 class="sec-title">우리 가족 <span class="muted" id="here-count"></span></h2>
-      <div class="room-grid" id="room-grid"></div>
+    <!-- 비서실: 방 현황 + 내 자리 + 채팅 한 화면 -->
+    <section class="view" id="view-desk">
 
-      <h2 class="sec-title">내 자리</h2>
-      <div class="card">
+      <div class="room-bar" id="room-grid"></div>
+
+      <div class="seat-bar">
+        <button type="button" class="seat-sum" id="seat-toggle" aria-expanded="false">
+          <span class="ava" id="seat-ava"></span>
+          <span class="seat-sum-txt">
+            <span class="seat-sum-name" id="seat-sum-name">나 선택</span>
+            <span class="seat-sum-sub" id="seat-sum-sub">내 자리를 골라 주세요</span>
+          </span>
+          <span class="seat-caret" id="seat-caret">내 자리 ▾</span>
+        </button>
+      </div>
+
+      <div class="seat-panel" id="seat-panel" hidden>
         <div class="who-row" id="who-row"></div>
         <div class="seg" id="room-seg"></div>
         <div class="status-row">
@@ -67,22 +78,26 @@
           <button type="button" id="status-save">저장</button>
         </div>
       </div>
-    </section>
 
-    <section class="view" id="view-chat" hidden>
-      <h2 class="sec-title">회의실</h2>
       <div class="card chat-card">
+        <div class="chat-head">
+          <span class="chat-title">가족 대화 <em class="chat-sub" id="here-count"></em></span>
+          <div class="as-toggle" id="as-toggle" role="group" aria-label="말하는 사람">
+            <button type="button" data-as="me" class="sel">나</button>
+            <button type="button" data-as="pickle">내 비서</button>
+          </div>
+        </div>
         <div class="chat-list" id="chat-list">
-          <p class="empty" id="chat-empty">아직 메모가 없어요.</p>
+          <p class="empty">아직 메모가 없어요.</p>
         </div>
         <form class="input-row" id="chat-form">
-          <input id="chat-input" type="text" maxlength="200" placeholder="메모 남기기" autocomplete="off">
+          <input id="chat-input" type="text" maxlength="200" placeholder="가족·비서에게 한마디" autocomplete="off">
           <button type="submit">보내기</button>
         </form>
       </div>
     </section>
 
-    <section class="view" id="view-todo" hidden>
+    <section class="view view-scroll" id="view-todo" hidden>
       <h2 class="sec-title">할 일 <span class="muted" id="todo-count"></span></h2>
       <div class="card">
         <form class="input-row" id="todo-form">
@@ -97,8 +112,7 @@
   </main>
 
   <nav class="tabbar" id="tabbar">
-    <button type="button" data-tab="office" class="active">오피스</button>
-    <button type="button" data-tab="chat">회의실</button>
+    <button type="button" data-tab="desk" class="active">비서실</button>
     <button type="button" data-tab="todo">할 일</button>
   </nav>
 </div>
@@ -116,6 +130,6 @@
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
-<script src="app.js?v=7"></script>
+<script src="app.js?v=8"></script>
 </body>
 </html>
