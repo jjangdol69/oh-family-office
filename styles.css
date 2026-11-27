@@ -140,7 +140,7 @@ h1,h2,h3,p{margin:0}
 .room-count{font-size:11px; font-weight:700; color:var(--ink-2); background:rgba(255,255,255,.8); border:1px solid var(--line); padding:2px 8px; border-radius:999px}
 .room-people{display:flex; flex-direction:column; gap:7px}
 .person{display:flex; align-items:center; gap:9px}
-.person .ava{width:34px; height:34px; flex:0 0 34px; position:relative}
+.person .ava{width:36px; height:36px; flex:0 0 36px; position:relative}
 .person .ava svg{width:100%; height:100%}
 .person-txt{min-width:0; flex:1}
 .person-name{font-size:12.5px; font-weight:800; display:flex; align-items:center; gap:5px}
@@ -251,12 +251,15 @@ h1,h2,h3,p{margin:0}
 
 /* ── 탭바 ────────────────────────────────────── */
 .tabbar{
-  position:fixed; left:0; right:0; bottom:0; z-index:30;
+  position:fixed; left:50%; transform:translateX(-50%); bottom:0; z-index:30;
+  width:100%; max-width:760px;
   display:grid; grid-template-columns:repeat(3,1fr); gap:6px;
   padding:8px 12px calc(8px + env(safe-area-inset-bottom));
   background:rgba(255,253,250,.94);
-  border-top:1px solid var(--line);
+  border:1px solid var(--line); border-bottom:none;
+  border-radius:22px 22px 0 0;
   backdrop-filter:blur(12px);
+  box-shadow:0 -6px 18px rgba(120,90,60,.06);
 }
 .tab{
   display:flex; flex-direction:column; align-items:center; gap:2px;
