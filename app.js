@@ -449,6 +449,18 @@ $("#todo-list").addEventListener("click", (e) => {
 });
 
 /* ── 탭 · 토스트 ──────────────────────── */
+/* 아이폰 키보드가 올라오면 화면 높이를 맞춰 입력줄이 가리지 않게 한다 */
+(function fitViewport() {
+  const vv = window.visualViewport;
+  if (!vv) return;
+  const fit = () => {
+    document.documentElement.style.setProperty("--vvh", Math.round(vv.height) + "px");
+  };
+  vv.addEventListener("resize", fit);
+  vv.addEventListener("scroll", fit);
+  fit();
+})();
+
 $("#tabbar").addEventListener("click", (e) => {
   const b = e.target.closest("[data-tab]");
   if (!b) return;
