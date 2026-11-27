@@ -176,7 +176,7 @@ h1,h2,h3,p{margin:0}
   border-top-left-radius:4px;color:var(--ink);
 }
 .msg.pickle .bubble{
-  background:var(--whoTint);border:1px solid var(--who);border-left-width:3px;
+  background:#f1f4eb;border:1px solid var(--who);border-left-width:3px;
   border-top-left-radius:4px;color:#2c2f28;
 }
 .msg.mine .bubble{
