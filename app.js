@@ -201,10 +201,11 @@ function startRealtime() {
   });
 
   // 내 하트비트 (접속 중 표시)
+  if (state.me) db.ref("office/" + state.me).update({ at: Date.now() });
   setInterval(() => {
     if (!state.me) return;
     db.ref("office/" + state.me).update({ at: Date.now() });
-  }, 60 * 1000);
+  }, 45 * 1000);
 
   setInterval(() => { renderOffice(); renderChat(false); }, 60 * 1000);
 }
